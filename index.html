@@ -76,20 +76,21 @@
         <table>
           <tr>
             <td>SubTotal</td>
-            <td>$<span id="sub-Total">1000.00</span></td>
+            <td>$<span id="subTotal">1000.00</span></td>
           </tr>
           <tr>
-            <td>Tax &nbsp;(30%)</td>
-            <td>$<span id="tax-Count">00</span></td>
+            <td>Tax &nbsp;(10%)</td>
+            <td>$<span id="tax-count">00</span></td>
           </tr>
           <tr>
             <td>NetPrice</td>
-            <td>$<span id="net-Price">00</span></td>
+            <td>$<span id="net-price">00</span></td>
           </tr>
         </table>
       </div>
     </div>
     <script>
+      //==================== Third Method ====================
       function handle_Goods_Change(product, isChange) {
         let product_Quantity = document.getElementById(product + "-Quantity");
         let product_Count = parseInt(product_Quantity.value);
@@ -102,17 +103,46 @@
         if (isChange == false && product_New_Count > 0) {
           product_New_Count = product_Count - 1;
         }
+//////////// setting up the updated value into the input ////////////////////////////
         product_Quantity.value = product_New_Count;
         let product_price = 0;
+        
         if (product == "goods") {
           product_price = product_New_Count * 1000;
         }
+
         if (product == "product") {
           product_price = product_New_Count * 200;
         }
-        // let product_Price = product_New_Count * 1000;
+
         document.getElementById(product + "-Price").innerText = product_price;
+        subTotalCalculate();
       }
+      // function for calculating subTotal taking  input value;
+
+         function gettingInputValue(inputId) {
+         let input = document.getElementById(inputId + "-Quantity").value;
+         let InputCount = parseInt(input);
+         return InputCount;
+      }
+
+      function subTotalCalculate() {
+        let goods_count = gettingInputValue("goods");
+        let product_count = gettingInputValue("product");
+
+        let subTotal = goods_count * 1000 + product_count * 200;
+        document.getElementById("subTotal").innerText = subTotal;
+
+        let totalTax = Math.round(subTotal * 0.1);
+        document.getElementById("tax-count").innerText = totalTax;
+
+        let netPrice = totalTax + subTotal;
+        document.getElementById("net-price").innerText=netPrice;
+      }
+
+      
+      //==================== Second Method(partly) ====================
+
       // function handle_Goods_Change(isAlternate) {
       //   let goods_Quantity = document.getElementById("goods-Quantity");
       //   let goods_Count = parseInt(goods_Quantity.value);
@@ -151,6 +181,7 @@
       //   return takingValIntoNum;
       // }
 
+      //==================== First Method ====================
       // Event Listener for plusBtn.
       // let myPlusBtn = document.getElementById("maxBtn");
       // myPlusBtn.addEventListener("click", function () {
