@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <script src="index.js"></script> -->
+    <title>Cart Project</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="small-container cart-page">
+      <table>
+        <tr>
+          <th>ProductName</th>
+          <th>Quantity</th>
+          <th>Price</th>
+        </tr>
+        <tr>
+          <td>
+            <div class="cart-info">
+              <img src="images/picture-1.jpg" />
+              <div class="cart-descrip">
+                <p>Iphone Black</p>
+                <small>Price : 1000</small>
+                <a href="">Romove</a>
+              </div>
+            </div>
+          </td>
+          <td>
+            <input
+              type="button"
+              onclick="handle_Goods_Change('goods',false)"
+              value="min"
+            />
+            <input type="text" id="goods-Quantity" value="1" />
+            <input
+              type="button"
+              onclick="handle_Goods_Change('goods',true)"
+              value="Plus"
+            />
+          </td>
+          <td>$<span id="goods-Price">1000.00</span></td>
+        </tr>
+        <!-- second row of mobile cart page -->
+        <!-- second row of mobile cart page -->
+        <tr>
+          <td>
+            <div class="cart-info">
+              <img src="images/picture-1.jpg" />
+              <div class="cart-descrip">
+                <p>Iphone Black</p>
+                <small>Price :$<span>1200</span> </small>
+                <a href="">Romove</a>
+              </div>
+            </div>
+          </td>
+          <td>
+            <input
+              type="button"
+              onclick="handle_Goods_Change('product',false)"
+              value="min"
+            />
+            <input type="text" id="product-Quantity" value="1" />
+            <input
+              type="button"
+              onclick="handle_Goods_Change('product',true)"
+              value="Plus"
+            />
+          </td>
+
+          <td>$ <span id="product-Price">200.00</span></td>
+        </tr>
+      </table>
+      <div class="total-price">
+        <table>
+          <tr>
+            <td>SubTotal</td>
+            <td>$<span id="sub-Total">1000.00</span></td>
+          </tr>
+          <tr>
+            <td>Tax &nbsp;(30%)</td>
+            <td>$<span id="tax-Count">00</span></td>
+          </tr>
+          <tr>
+            <td>NetPrice</td>
+            <td>$<span id="net-Price">00</span></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <script>
+      function handle_Goods_Change(product, isChange) {
+        let product_Quantity = document.getElementById(product + "-Quantity");
+        let product_Count = parseInt(product_Quantity.value);
+        let product_New_Count = product_Count;
+
+        if (isChange == true) {
+          product_New_Count = product_Count + 1;
+        }
+
+        if (isChange == false && product_New_Count > 0) {
+          product_New_Count = product_Count - 1;
+        }
+        product_Quantity.value = product_New_Count;
+        let product_price = 0;
+        if (product == "goods") {
+          product_price = product_New_Count * 1000;
+        }
+        if (product == "product") {
+          product_price = product_New_Count * 200;
+        }
+        // let product_Price = product_New_Count * 1000;
+        document.getElementById(product + "-Price").innerText = product_price;
+      }
+      // function handle_Goods_Change(isAlternate) {
+      //   let goods_Quantity = document.getElementById("goods-Quantity");
+      //   let goods_Count = parseInt(goods_Quantity.value);
+      //   let goods_New_Count = goods_Count;
+
+      //   if (isAlternate == true) {
+      //     goods_New_Count = goods_Count + 1;
+      //   }
+
+      //   if (isAlternate == false && goods_New_Count > 0) {
+      //     goods_New_Count = goods_Count - 1;
+      //   }
+
+      //   goods_Quantity.value = goods_New_Count;
+      //   let goods_Price = goods_New_Count * 1000;
+      //   document.getElementById("goods-Price").innerText = goods_Price;
+      // }
+      // function handleProductChange(isChange) {
+      //   let productInput = document.getElementById("product-Count");
+      //   let productCount = parseInt(productInput.value);
+      //   let productNewCount = productCount;
+      //   if (isChange == true) {
+      //     productNewCount = productCount + 1;
+      //   }
+      //   if (isChange == false && productNewCount > 0) {
+      //     productNewCount = productCount - 1;
+      //   }
+      //   productInput.value = productNewCount;
+      //   let productPrice = productNewCount * 200;
+      //   document.getElementById("product-Price").innerText = productPrice;
+      // }
+
+      // function plusFunction(anyId) {
+      //   const takingValue = document.getElementById(anyId).value;
+      //   const takingValIntoNum = parseInt(takingValue);
+      //   return takingValIntoNum;
+      // }
+
+      // Event Listener for plusBtn.
+      // let myPlusBtn = document.getElementById("maxBtn");
+      // myPlusBtn.addEventListener("click", function () {
+      //   // taking mobileQuantity value;
+      //   let piceeCount = document.getElementById("productQuntity").value;
+      //   let piceeCountNum = parseInt(piceeCount);
+      //   let currentPiceeCuount = (document.getElementById(
+      //     "productQuntity"
+      //   ).value = piceeCountNum + 1);
+      //   // taking mobile per piece value;
+      //   let priceCount = document.getElementById("productPrice").innerText;
+      //   let priceCountNum = parseInt(priceCount);
+      //   console.log(priceCountNum);
+      //   let currentPrice = (document.getElementById("productPrice").innerText =
+      //     1000 * currentPiceeCuount);
+      //   // taking subtotal price
+      //   let subTotal = document.getElementById("subTotal").innerText;
+      //   let subTotalNum = parseInt(subTotal);
+      //   let totalPriceBeforeTax = (document.getElementById(
+      //     "subTotal"
+      //   ).innerText = subTotalNum + 1000);
+      //   // taling tax input value;
+      //   let taxCount = document.getElementById("taxCount").innerText;
+      //   let taxCountNum = parseInt(taxCount);
+      //   let totalTax = (document.getElementById("taxCount").innerText =
+      //     totalPriceBeforeTax * 0.1);
+      //   // taking netPrice innerTextValue;
+      //   let netPrice = document.getElementById("netPrice").innerText;
+      //   let netPriceNum = parseInt(netPrice);
+      //   let netPriceVal = (document.getElementById("netPrice").innerText =
+      //     totalPriceBeforeTax - totalTax);
+      // });
+
+      // //++++ +____________ Event Listener for Minus button ------ -----??++++++++++
+
+      // let myMinusBtn = document.getElementById("minBtn");
+      // myMinusBtn.addEventListener("click", function () {
+      //   // taking mobileQuantity value;
+      //   let piceeCount = document.getElementById("productQuntity").value;
+      //   let piceeCountNum = parseInt(piceeCount);
+      //   let currentPiceeCuount = (document.getElementById(
+      //     "productQuntity"
+      //   ).value = piceeCountNum - 1);
+      //   // taking mobile per piece value;
+      //   let priceCount = document.getElementById("productPrice").innerText;
+      //   let priceCountNum = parseInt(priceCount);
+      //   console.log(priceCountNum);
+      //   let currentPrice = (document.getElementById("productPrice").innerText =
+      //     1000 * currentPiceeCuount);
+      //   // taking subtotal price
+      //   let subTotal = document.getElementById("subTotal").innerText;
+      //   let subTotalNum = parseInt(subTotal);
+      //   let totalPriceBeforeTax = (document.getElementById(
+      //     "subTotal"
+      //   ).innerText = subTotalNum - 1000);
+      //   // taling tax input value;
+      //   let taxCount = document.getElementById("taxCount").innerText;
+      //   let taxCountNum = parseInt(taxCount);
+      //   let totalTax = (document.getElementById("taxCount").innerText =
+      //     totalPriceBeforeTax * 0.1);
+      //   // taking netPrice innerTextValue;
+      //   let netPrice = document.getElementById("netPrice").innerText;
+      //   let netPriceNum = parseInt(netPrice);
+      //   let netPriceVal = (document.getElementById("netPrice").innerText =
+      //     totalPriceBeforeTax - totalTax);
+      // });
+    </script>
+  </body>
+</html>
